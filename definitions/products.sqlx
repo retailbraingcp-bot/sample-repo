@@ -1,11 +1,13 @@
-config{
-    type:"table",
-    schema:"DB_SILVER",
-    name:"products"
+config {
+    type: "table",
+    schema: "DB_SILVER",
+    name: "products"
 }
-select 
-id,
-created_at,
-updated_at,
-retailer_id
-from ${ref("raw_stg")}
+
+SELECT
+  id,
+  created_at,
+  updated_at,
+  retailer_id
+FROM
+  ${ref("raw_stg")}
