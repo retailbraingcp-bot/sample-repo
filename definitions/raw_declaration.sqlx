@@ -1,0 +1,5 @@
+config {
+    type: "declaration",
+    schema: "DB_STG",
+    name: "raw_stg"
+}

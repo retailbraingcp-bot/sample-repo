@@ -1,0 +1,11 @@
+config{
+    type:"table",
+    schema:"DB_SILVER",
+    name:"products"
+}
+select 
+id,
+created_at,
+updated_at,
+retailer_id
+from ${ref("raw_stg")}
