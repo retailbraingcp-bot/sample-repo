@@ -21,7 +21,8 @@ SELECT
   retailer_id
 FROM
   ${ref("raw_stg")}
-
-  ${when(incremental(),
-  "WHERE updated_at > (SELECT MAX(updated_at) FROM ${self()})""
-)}
+  ${
+      when(incremental(),
+          "WHERE updated_at > (SELECT MAX(updated_at) FROM ${self()})"
+      )
+  }
