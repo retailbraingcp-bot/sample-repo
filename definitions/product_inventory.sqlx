@@ -14,11 +14,11 @@ SELECT
   JSON_VALUE(brain_module_payload, '$.product.name') AS name,
   CAST(JSON_VALUE(brain_module_payload, '$.inventory.quantity') AS NUMERIC) AS quantity,
   CAST(JSON_VALUE(brain_module_payload, '$.inventory.available') AS STRING) AS is_available,
-  CAST(NULLIF(JSON_VALUE(brain_module_payload, '$.inventory.min_stock_qty'), '')AS INT64) AS min_stock_qty,
-  NULLIF(JSON_QUERY(brain_module_payload, '$.custom'),'null') AS custom,
+  CAST(JSON_VALUE(brain_module_payload, '$.inventory.min_stock_qty') AS INT64) AS min_stock_qty,
+  JSON_QUERY(brain_module_payload, '$.custom') AS custom,
   created_at,
   updated_at,
   retailer_id
 FROM
-  ${ref("raw_stg")},
+  ${ref("raw_stg")}
   /*where ingestion_timestamp>(select max(updated_date) from ${self()})*/
