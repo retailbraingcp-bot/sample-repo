@@ -21,4 +21,7 @@ SELECT
   retailer_id
 FROM
   ${ref("raw_stg")}
-  /*where ingestion_timestamp>(select max(updated_date) from ${self()})*/
+
+  ${when(incremental(),
+  "WHERE updated_at > (SELECT MAX(updated_at) FROM ${self()})""
+)}
