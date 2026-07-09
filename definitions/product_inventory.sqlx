@@ -22,9 +22,9 @@ SELECT
   ingestion_timestamp
 FROM
   ${ref("raw_stg")}
-  ${
-      when(
-          incremental(),
-          "WHERE ingestion_timestamp > (SELECT MAX(ingestion_timestamp) FROM ${self()})"
-      )
-  }
+${when(
+  incremental(),
+  `WHERE ingestion_timestamp >
+   (SELECT MAX(ingestion_timestamp)
+    FROM ${self()})`
+)}
