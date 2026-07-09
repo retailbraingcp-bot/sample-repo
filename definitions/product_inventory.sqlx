@@ -18,11 +18,13 @@ SELECT
   JSON_QUERY(brain_module_payload, '$.custom') AS custom,
   created_at,
   updated_at,
-  retailer_id
+  retailer_id,
+  ingestion_timestamp
 FROM
   ${ref("raw_stg")}
   ${
-      when(incremental(),
-          "WHERE updated_at > (SELECT MAX(updated_at) FROM ${self()})"
+      when(
+          incremental(),
+          "WHERE ingestion_timestamp > (SELECT MAX(ingestion_timestamp) FROM ${self()})"
       )
   }
