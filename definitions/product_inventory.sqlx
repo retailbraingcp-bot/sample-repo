@@ -2,6 +2,7 @@ config {
     type: "incremental",
     schema: "DB_SILVER",
     name: "product_inventory",
+    
     assertions: {
         uniqueKey: ["id"]
     }
